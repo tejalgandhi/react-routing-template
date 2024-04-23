@@ -1,0 +1,22 @@
+.navbar_list {
+  list-style-type: none;
+  overflow: hidden;
+  position: fixed; /* Fixed position to keep it at the top */
+  top: 0; /* Position from the top */
+  left: 0; /* Position from the right */
+}
+
+.navbar_list li {
+  float: left; /* Float the list items to the right */
+}
+
+.navbar_list li a {
+  display: block;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.navbar_list li a:hover {
+  background-color: #ddd;
+}
