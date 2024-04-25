@@ -1,6 +1,26 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  z-index: var(--z-fixed);
+  margin-top: 5rem;
+  height: 200vh;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  height: var(--header-height);
+  margin: 1rem;
+}
 .navbar_list {
   list-style-type: none;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
   position: fixed; /* Fixed position to keep it at the top */
   top: 0; /* Position from the top */
   left: 0; /* Position from the right */
@@ -11,7 +31,7 @@
 }
 
 .navbar_list li a {
-  display: block;
+  /* display: block; */
   padding: 14px 16px;
   text-decoration: none;
   color: black;
@@ -19,4 +39,8 @@
 
 .navbar_list li a:hover {
   background-color: #ddd;
+}
+
+.navbar_list li a.active {
+  color: blue;
 }

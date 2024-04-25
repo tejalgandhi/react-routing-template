@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
@@ -11,9 +9,10 @@ import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   return (
-    <>
+    <div className="app">
       <Navbar />
-      <main className="main_code">
+      <hr />
+      <main className="main_content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
@@ -22,7 +21,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-    </>
+    </div>
   );
 }
 
