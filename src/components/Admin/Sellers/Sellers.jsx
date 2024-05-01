@@ -29,6 +29,7 @@ const Sellers = () => {
       .catch((err) => {
         setIsLoading(false);
         setErrors(err.message);
+        setErrors(err.message);
         console.log("error");
       });
   }, []);
