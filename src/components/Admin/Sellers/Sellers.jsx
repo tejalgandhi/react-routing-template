@@ -7,6 +7,7 @@ import Loader from "../../Common/Loader/Loader";
 const Sellers = () => {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState("");
   const [sellers, setSellers] = useState([]);
 
   // useEffect(() => {
@@ -18,11 +19,31 @@ const Sellers = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
+    fetchSellers();
+    // axios
+    //   .get("https://jsonplaceholder.typicode.com/users")
+    //   .then((res) => {
+    //     setSellers(res.data);
+    //     setIsLoading(false);
+    //   })
+    //   .catch((err) => {
+    //     setIsLoading(false);
+    //     setErrors(err.message);
+    //     console.log("error");
+    //   });
+  }, []);
+
+  const fetchSellers = async () => {
+    try {
+      const res = await axios.get("https://jsonplaceholder.typicode.com/users");
       setSellers(res.data);
       setIsLoading(false);
-    });
-  }, []);
+    } catch (err) {
+      setIsLoading(false);
+      setErrors(err.message);
+      console.log("error");
+    }
+  };
 
   return (
     <>
@@ -34,6 +55,7 @@ const Sellers = () => {
           <Loader />
         </div>
       )}
+      {errors && <em>{errors}</em>}
       {sellers.map((seller) => (
         <p key={seller.id}>{seller.name}</p>
       ))}
