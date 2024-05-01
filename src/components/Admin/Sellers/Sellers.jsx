@@ -46,10 +46,43 @@ const Sellers = () => {
   //   }
   // };
 
+  const addSeller = (e) => {
+    const newSeller = {
+      name,
+      id: sellers.length + 1,
+    };
+    setSellers([newSeller, ...sellers]);
+    axios
+      .post("https://jsonplaceholder.typicode.com/users", newSeller)
+      .then((res) => {
+        setSellers([res.data, ...sellers]);
+      })
+      .catch((err) => {
+        setErrors(err.message);
+        setSellers(sellers);
+      });
+  };
+  const deleteSeller = (id) => {
+    const filterSeller = sellers.filter((seller) => {
+      return seller.id != id;
+    });
+    setSellers(filterSeller);
+    axios
+      .delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .then((res) => {
+        // setSellers(res);
+      })
+      .catch((err) => {
+        setErrors(err.message);
+        setSellers(sellers);
+      });
+  };
+
   return (
     <>
       <h2>Sellers</h2>
       <input type="text" onChange={(e) => setName(e.target.value)}></input>
+      <button onClick={addSeller}>Add Seller</button>
       {isLoading && (
         <div>
           {" "}
@@ -57,9 +90,22 @@ const Sellers = () => {
         </div>
       )}
       {errors && <em>{errors}</em>}
-      {sellers.map((seller) => (
-        <p key={seller.id}>{seller.name}</p>
-      ))}
+      <table>
+        <tbody>
+          {sellers.map((seller) => (
+            <tr>
+              {" "}
+              <td>{seller.name}</td>
+              <td>
+                {" "}
+                <button onClick={() => deleteSeller(seller.id)}>
+                  delete seller
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };
