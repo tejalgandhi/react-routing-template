@@ -19,31 +19,31 @@ const Sellers = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchSellers();
-    // axios
-    //   .get("https://jsonplaceholder.typicode.com/users")
-    //   .then((res) => {
-    //     setSellers(res.data);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((err) => {
-    //     setIsLoading(false);
-    //     setErrors(err.message);
-    //     console.log("error");
-    //   });
+    // fetchSellers();
+    axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then((res) => {
+        setSellers(res.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setErrors(err.message);
+        console.log("error");
+      });
   }, []);
 
-  const fetchSellers = async () => {
-    try {
-      const res = await axios.get("https://jsonplaceholder.typicode.com/users");
-      setSellers(res.data);
-      setIsLoading(false);
-    } catch (err) {
-      setIsLoading(false);
-      setErrors(err.message);
-      console.log("error");
-    }
-  };
+  // const fetchSellers = async () => {
+  //   try {
+  //     const res = await axios.get("https://jsonplaceholder.typicode.com/users");
+  //     setSellers(res.data);
+  //     setIsLoading(false);
+  //   } catch (err) {
+  //     setIsLoading(false);
+  //     setErrors(err.message);
+  //     console.log("error");
+  //   }
+  // };
 
   return (
     <>
