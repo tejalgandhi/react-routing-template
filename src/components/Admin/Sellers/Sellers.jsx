@@ -64,11 +64,29 @@ const Sellers = () => {
   };
   const deleteSeller = (id) => {
     const filterSeller = sellers.filter((seller) => {
-      return seller.id != id;
+      return seller.id !== id;
     });
     setSellers(filterSeller);
     axios
       .delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .then((res) => {
+        // setSellers(res);
+      })
+      .catch((err) => {
+        setErrors(err.message);
+        setSellers(sellers);
+      });
+  };
+  const updateSeller = (id) => {
+    const filterSeller = sellers.map((seller) => {
+      if (seller.id == id) {
+        seller.name = seller.name + " updated";
+      }
+      return seller;
+    });
+    setSellers(filterSeller);
+    axios
+      .patch(`https://jsonplaceholder.typicode.com/users/${id}`, filterSeller)
       .then((res) => {
         // setSellers(res);
       })
@@ -93,13 +111,14 @@ const Sellers = () => {
       <table>
         <tbody>
           {sellers.map((seller) => (
-            <tr>
-              {" "}
+            <tr key={seller.id}>
               <td>{seller.name}</td>
               <td>
-                {" "}
                 <button onClick={() => deleteSeller(seller.id)}>
                   delete seller
+                </button>
+                <button onClick={() => updateSeller(seller.id)}>
+                  Update seller
                 </button>
               </td>
             </tr>
