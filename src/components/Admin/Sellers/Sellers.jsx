@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import ApiClient from "../../../utiles/api-client";
 
 import "./Sellers.css";
 import Loader from "../../Common/Loader/Loader";
@@ -20,8 +20,7 @@ const Sellers = () => {
   useEffect(() => {
     setIsLoading(true);
     // fetchSellers();
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
+    ApiClient.get("/users")
       .then((res) => {
         setSellers(res.data);
         setIsLoading(false);
@@ -52,8 +51,7 @@ const Sellers = () => {
       id: sellers.length + 1,
     };
     setSellers([newSeller, ...sellers]);
-    axios
-      .post("https://jsonplaceholder.typicode.com/users", newSeller)
+    ApiClient.post("/users", newSeller)
       .then((res) => {
         setSellers([res.data, ...sellers]);
       })
@@ -67,8 +65,7 @@ const Sellers = () => {
       return seller.id !== id;
     });
     setSellers(filterSeller);
-    axios
-      .delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+    ApiClient.delete(`/users/${id}`)
       .then((res) => {
         // setSellers(res);
       })
